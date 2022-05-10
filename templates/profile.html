@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <div>
+        <form class="login_form" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="photo">Изменить фото профиля</label>
+                <input type="file" class="form-control-file" id="photo" name="file">
+            </div>
+            <p></p>
+            <button type="submit" class="btn btn-primary">Изменить</button>
+            <p></p>
+            <img src="{{current_user.photo}}" width="20%" height="30%" style="float: left" border="3" alt="Здесь фото профиля"/>
+            <h2 style="margin-left: 100px;" >{{ current_user.name }} {{ current_user.surname }}</h2>
+        </form>
+    </div>
+    <a class="btn btn-primary" href="/logout" style="float: right">Выйти</a>
+    <br>
+    <br>
+    <a class="btn btn-success" href="/main_page" style="float: right">Вернуться на главную страницу</a>
+{% endblock %}
