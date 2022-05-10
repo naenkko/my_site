@@ -40,7 +40,7 @@ def profile():
         img.save(way)
 
         db_sess = db_session.create_session()
-        user = db_sess.query(User).filter(User.id == 1).first()
+        user = db_sess.query(User).filter(User.id == current_user.id).first()
         print(user.photo)
         user.photo = way
         db_sess.commit()
