@@ -1,6 +1,4 @@
-import os
-
-from flask import Flask, url_for, request, render_template, redirect, make_response, session
+from flask import Flask, request, render_template, redirect
 
 from PIL import Image
 
@@ -104,69 +102,14 @@ def sign_up():
     return render_template('register.html', title='Регистрация', form=form)
 
 
-@app.route("/session_test")
-def session_test():
-    visits_count = session.get('visits_count', 0)
-    session['visits_count'] = visits_count + 1
-    return make_response(
-        f"Вы пришли на эту страницу {visits_count + 1} раз")
-
-
 def main():
     db_session.global_init("db/blogs.db")
 
-    # user = User()
-    # user.name = "Nastya"
-    # user.surname = "Babenko"
-    # user.email = "email@email.ru"
-    # user.email = "email@email.ru"
-    # db_sess = db_session.create_session()
-    # db_sess.add(user)
-    # db_sess.commit()
-
-    # news = News(title="Первая новость", content="Привет блог!",
-    #             user_id=1, is_private=False)
-    # db_sess.add(news)
-    # db_sess.commit()
-    #
-    # user = db_sess.query(User).filter(User.id == 1).first()
-    # news = News(title="Вторая новость", content="Уже вторая запись!",
-    #             user=user, is_private=False)
-    # db_sess.add(news)
-    # db_sess.commit()
-    #
-    # user = db_sess.query(User).filter(User.id == 1).first()
-    # news = News(title="Личная запись", content="Эта запись личная",
-    #             is_private=True)
-    # user.news.append(news)
-    # db_sess.commit()
-
-    # вывести первого юзера
-    # user = db_sess.query(User).first()
-    # print(user.name)
-
-    # печать всех значений юзер
-    # for user in db_sess.query(User).all():
-    #     print(user)
-
-    # применить фильтр и вывести нужное
-    # for user in db_sess.query(User).filter((User.id > 1) | (User.email.notilike("%1%"))):
-    #     print(user)
-
-    # изменить данные
-    # user = db_sess.query(User).filter(User.id == 1).first()
-    # print(user)
-    # user.name = "Измененное имя пользователя"
-    # db_sess.commit()
-
-    # удалить какие-то данные
-    # db_sess.query(User).filter(User.id >= 2).delete()
-    # db_sess.commit()
-
-    # удалить выбранную запись
-    # user = db_sess.query(User).filter(User.id == 2).first()
-    # db_sess.delete(user)
-    # db_sess.commit()
+    news = News(title="Первая новость", content="Привет блог!",
+                user_id=1, is_private=False)
+    db_sess = db_session.create_session()
+    db_sess.add(news)
+    db_sess.commit()
 
     app.run(port=8080, host='127.0.0.1', debug=True)
 
